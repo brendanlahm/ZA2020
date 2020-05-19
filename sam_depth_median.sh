@@ -4,7 +4,7 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=trimmomatic
+#SBATCH --job-name=median
 #  how many cpus are requested
 #SBATCH --ntasks=4
 #  run on one node, important if you have more than 1 ntasks
@@ -23,10 +23,8 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=global
 
-
-for each in *R1_001.fastq.gz
+for each in *.bam
 do
-java -jar /data/biosoftware/Trimmomatic/Trimmomatic-0.38/trimmomatic-0.38.jar PE ${each} ${each%R1_001.fastq.gz}R2_001.fastq.gz \
- -baseout /groups/envgenom/Brendan_Lahm/Data/1_Filtered_reads/200505/${each%R1_001.fastq.gz}D.fq.gz \
- CROP:145 ILLUMINACLIP:/groups/envgenom/Brendan_Lahm/Data/0_Raw_reads/TruSeq3-PE-G.fa:2:30:10 LEADING:25 SLIDINGWINDOW:3:25 MINLEN:35
+samtools depth ${each} | sort -nk3 | awk ' { a[i++]=$3; } END { print a[int(i/2)]; }' \
+> ./Coverage/${each%sorted.bam}depth_median.txt
 done
