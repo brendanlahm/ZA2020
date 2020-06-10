@@ -3,15 +3,15 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=za020
+#SBATCH --job-name=select
 #  how many cpus are requested
-#SBATCH --ntasks=4
+#SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=24:00:00
+#SBATCH --time=4:00:00
 #  maximum requested memory
-#SBATCH --mem=50G
+#SBATCH --mem=10G
 #  write std out and std error to these files
 #SBATCH --error=essai_aln_280.sterr
 #SBATCH --output=essai_aln_280.stout
@@ -20,14 +20,13 @@
 #SBATCH --mail-user=lahm@evolbio.mpg.de
 #  which partition?
 #  there are global,testing,highmem,standard,fast
-#SBATCH --partition=global
+#SBATCH --partition=standard
 
-gatk HaplotypeCaller  \
-   -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
-   -I ZA020_1_S14_A_RG.bam \
-   -I ZA020_1_S14_B_RG.bam \
-   -I ZA020_1_S14_C_RG.bam \
-   -I ZA020_1_S14_D_RG.bam \
-   -O ./haps/ZA020_1_S14.g.vcf.gz \
-   -ERC GVCF \
-   -ALIAS ZA020_1_S14
+for each in *.g.vcf.gz
+do
+gatk SelectVariants \
+     -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
+     -V ${each} \
+     --remove-unused-alternates \
+     -O ./alt/${each.g.vcf.gz}_alt.g.vcf.gz
+done

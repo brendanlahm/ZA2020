@@ -6,9 +6,9 @@ do
 java -jar /home/lahm/software/picard/build/libs/picard.jar AddOrReplaceReadGroups \
       I=${each} \
       O=./RG/${each%sorted.bam}RG.bam \
-      RGID=D \
+      RGID=X \
       RGLB=lib1 \
       RGPL=illumina \
-      RGPU=run4 \
-      RGSM=${each%_D_sorted.bam}
+      RGPU=runX \
+      RGSM=${each_sorted.bam}
 done
