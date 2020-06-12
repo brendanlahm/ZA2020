@@ -3,15 +3,15 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=select
+#SBATCH --job-name=bwa
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=4:00:00
+#SBATCH --time=10:00:00
 #  maximum requested memory
-#SBATCH --mem=10G
+#SBATCH --mem=20G
 #  write std out and std error to these files
 #SBATCH --error=essai_aln_280.sterr
 #SBATCH --output=essai_aln_280.stout
@@ -22,12 +22,6 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=standard
 
-for each in *.g.vcf.gz
-do
-gatk SelectVariants \
-     -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
-     -V ${each} \
-     --remove-unused-alternates \
-     --restrict-alleles-to BIALLELIC \
-     -O ./alt2/${each%.g.vcf.gz}_alt.g.vcf.gz
-done
+/data/biosoftware/bwa/bwa-0.7.17/bwa mem -o ZA725_combined_aln.sam \
+/home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa ZA725_1P_combined.fq ZA725_2P_combined.fq
+

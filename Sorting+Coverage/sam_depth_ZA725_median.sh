@@ -3,15 +3,15 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=select
+#SBATCH --job-name=median
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=4:00:00
+#SBATCH --time=1:00:00
 #  maximum requested memory
-#SBATCH --mem=10G
+#SBATCH --mem=5G
 #  write std out and std error to these files
 #SBATCH --error=essai_aln_280.sterr
 #SBATCH --output=essai_aln_280.stout
@@ -22,12 +22,5 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=standard
 
-for each in *.g.vcf.gz
-do
-gatk SelectVariants \
-     -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
-     -V ${each} \
-     --remove-unused-alternates \
-     --restrict-alleles-to BIALLELIC \
-     -O ./alt2/${each%.g.vcf.gz}_alt.g.vcf.gz
-done
+samtools depth ZA725_combined_sorted.bam | sort -nk3 | awk ' { a[i++]=$3; } END { print a[int(i/2)]; }' \
+> ZA725_combined_depth_median.txt
