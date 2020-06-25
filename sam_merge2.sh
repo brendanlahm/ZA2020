@@ -3,15 +3,15 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=geno
+#SBATCH --job-name=merge
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=24:00:00
+#SBATCH --time=4:00:00
 #  maximum requested memory
-#SBATCH --mem=20G
+#SBATCH --mem=15G
 #  write std out and std error to these files
 #SBATCH --error=essai_aln_280.sterr
 #SBATCH --output=essai_aln_280.stout
@@ -22,7 +22,8 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=standard
 
-gatk GenotypeGVCFs \
-   -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
-   -V ZA_combined.g.vcf.gz \
-   -O ZA_genotype.vcf.gz
+for each in *A_RG.bam
+do
+samtools merge -r ${each%A_RG.bam}merge.bam ${each} ${each%A_RG.bam}B_RG.bam \
+${each%A_RG.bam}C_RG.bam ${each%A_RG.bam}D_RG.bam
+done
