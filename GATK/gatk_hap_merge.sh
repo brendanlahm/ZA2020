@@ -27,6 +27,7 @@ do
 gatk --java-options "-Xmx4g" HaplotypeCaller --pcr-indel-model NONE \
    -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
    -I ${each} \
-   -O ./haps/${each%bam}g.vcf.gz \
+   -O ./haps2/${each%bam}g.vcf.gz \
+   -ploidy 1 \
    -ERC GVCF
 done

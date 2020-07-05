@@ -9,7 +9,7 @@
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=24:00:00
+#SBATCH --time=15:00:00
 #  maximum requested memory
 #SBATCH --mem=20G
 #  write std out and std error to these files
@@ -20,7 +20,7 @@
 #SBATCH --mail-user=lahm@evolbio.mpg.de
 #  which partition?
 #  there are global,testing,highmem,standard,fast
-#SBATCH --partition=standard
+#SBATCH --partition=global
 
 gatk CombineGVCFs \
    -R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
@@ -44,21 +44,21 @@ gatk CombineGVCFs \
    --variant ZA764_S11_merge.g.vcf.gz \
    --variant ZA769_S12_merge.g.vcf.gz \
    --variant ZA782_S13_merge.g.vcf.gz \
-   --variant ST11IR_1_1_1.g.vcf.gz \
-   --variant ST11IR_1_10_1.g.vcf.gz \
-   --variant ST11IR_1_15_1.g.vcf.gz \
-   --variant ST11IR_1_15_2.g.vcf.gz \
-   --variant ST11IR_6_1_1.g.vcf.gz \
-   --variant ST11IR_6_1_2.g.vcf.gz \
-   --variant ST11IR_7_2_1.g.vcf.gz \
-   --variant ST11IR_7_2_4.g.vcf.gz \
-   --variant ST11IR_7_5_2.g.vcf.gz \
-   --variant ST11IR_8_1_1.g.vcf.gz \
-   --variant ST11IR_8_5_3.g.vcf.gz \
-   --variant ST11IR_11_1_1.g.vcf.gz \
-   --variant ST11IR_11_4_1.g.vcf.gz \
-   --variant STIR041.1.1.g.vcf.gz \
-   --variant STIR041.1.2.g.vcf.gz \
-   --variant STIR043.13.1.g.vcf.gz \
-   --variant STIR043.3.2.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_1_1_1_GTGAAA_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_1_10_1_CTTGTA_L001.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_1_15_1_GTTTCG_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_1_15_2_GTGGCC_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_6_1_1_AGTCAA_L001.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_6_1_2_CGTACG_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_7_2_1_GAGTGG_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_7_2_4_ACTGAT_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_7_5_2_AGTTCC_L001.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_8_1_1_ATGTCA_L001.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_8_5_3_ATTCCT_L002.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_11_1_1_CCGTCC_L001.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/ST11IR_11_4_1_GGCTAC_L001.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/STIR041.1.1.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/STIR041.1.2.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/STIR043.13.1.g.vcf.gz \
+   --variant /groups/envgenom/Brendan_Lahm/Data/2_Alignments/OG17/RG/haps2/STIR043.3.2.g.vcf.gz \
    -O ZA_combined.g.vcf.gz
