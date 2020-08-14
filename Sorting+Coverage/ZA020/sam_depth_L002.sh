@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 
-samtools depth ZA020_L002_sorted.bam | awk '{x+=$3}END{print x/NR}' \
-> ./Coverage/ZA020_L002_depth_mean.txt
-
+for each in *L002*bam
+do
+samtools depth ${each} | awk '{x+=$3}END{print x/NR}' \
+> ./Coverage/${each%sorted.bam}depth_mean.txt
+done

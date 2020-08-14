@@ -1,6 +1,9 @@
 #!/bin/bash
 
+for each in *L002*bam
+do
 java -jar /home/lahm/software/picard/build/libs/picard.jar SortSam \
-      I= ZA020_L002_n0.bam \
-      O=./Sorted/ZA020_L002_sorted.bam \
+      I= ${each} \
+      O=./Sorted/${each%.bam}_sorted.bam \
       SORT_ORDER=coordinate
+done

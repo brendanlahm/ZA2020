@@ -1,4 +1,6 @@
 #!/bin/bash
 
-samtools flagstat ZA020_L002_n0.bam > ./Flagstat/ZA020_L002_n0_flagstat.txt
-
+for each in *L002*bam
+do
+samtools flagstat ${each} > ./Flagstat/${each%.bam}_flagstat.txt
+done
