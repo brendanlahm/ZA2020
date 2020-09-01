@@ -1,14 +1,11 @@
 #!/bin/bash
 #
 
-for each in *.bam
-do
 java -jar /home/lahm/software/picard/build/libs/picard.jar AddOrReplaceReadGroups \
-      I=${each} \
-      O=./RG/${each%sorted.bam}RG.bam \
+      I=ST11IR_11_1_1_CCGTCC_L001_Za100_sorted.bam \
+      O=./RG/ST11IR_11_1_1_RG.bam \
       RGID=X \
       RGLB=lib1 \
       RGPL=illumina \
       RGPU=runX \
-      RGSM=${each%sorted.bam}
-done
+      RGSM=ST11IR_11_1_1
