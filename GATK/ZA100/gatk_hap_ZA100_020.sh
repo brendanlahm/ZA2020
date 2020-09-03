@@ -3,13 +3,13 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=haplo2
+#SBATCH --job-name=haplo20
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=24:00:00
+#SBATCH --time=6:00:00
 #  maximum requested memory
 #SBATCH --mem=20G
 #  write std out and std error to these files
@@ -22,12 +22,10 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=standard
 
-for each in *merge.bam
-do
 gatk --java-options "-Xmx4g" HaplotypeCaller --pcr-indel-model NONE \
    -R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
-   -I ${each} \
-   -O ./haps/${each%_merge.bam}.g.vcf.gz \
+   -I ZA020_merge.bam \
+   -O ./haps/ZA020.g.vcf.gz \
    -ploidy 1 \
    -ERC GVCF
-done
+

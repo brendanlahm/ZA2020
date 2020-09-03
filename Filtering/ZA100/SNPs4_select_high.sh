@@ -3,15 +3,15 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=filter
+#SBATCH --job-name=select
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=0:50:00
+#SBATCH --time=1:00:00
 #  maximum requested memory
-#SBATCH --mem=10G
+#SBATCH --mem=20G
 #  write std out and std error to these files
 #SBATCH --error=essai_aln_280.sterr
 #SBATCH --output=essai_aln_280.stout
@@ -20,11 +20,10 @@
 #SBATCH --mail-user=lahm@evolbio.mpg.de
 #  which partition?
 #  there are global,testing,highmem,standard,fast
-#SBATCH --partition=global
+#SBATCH --partition=standard
 
-gatk VariantFiltration \
--R /home/lahm/ZA/ZA17/Za17_softmasked_for_publication.fa \
--V ZA_genotype_select.vcf \
--O ZA_filtered_SNPs.vcf \
---filter-name "my_filter" \
---filter-expression "MQ < 40.0 || QD < 20.0"
+gatk SelectVariants \
+     -R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
+     -V SNPs4_high.vcf \
+     --exclude-filtered \
+     -O SNPs4_select.vcf

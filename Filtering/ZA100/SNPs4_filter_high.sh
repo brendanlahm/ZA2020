@@ -3,15 +3,15 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=haplo44
+#SBATCH --job-name=filter
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=12:00:00
+#SBATCH --time=0:50:00
 #  maximum requested memory
-#SBATCH --mem=20G
+#SBATCH --mem=10G
 #  write std out and std error to these files
 #SBATCH --error=essai_aln_280.sterr
 #SBATCH --output=essai_aln_280.stout
@@ -22,12 +22,9 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=standard
 
-for each in STIR04*bam
-do
-gatk --java-options "-Xmx4g" HaplotypeCaller --pcr-indel-model NONE \
-   -R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
-   -I ${each} \
-   -O ./haps/${each%_RG.bam}.g.vcf.gz \
-   -ploidy 1 \
-   -ERC GVCF
-done
+gatk VariantFiltration \
+-R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
+-V SNPs4_genotype_select.vcf \
+-O SNPs4_high.vcf \
+--filter-name "high_filter" \
+--filter-expression "MQ < 55.0 || QD < 20.0"

@@ -3,13 +3,13 @@
 #  submit by  sbatch serial-job.sh
 #
 #  specify the job name
-#SBATCH --job-name=haplo7
+#SBATCH --job-name=select
 #  how many cpus are requested
 #SBATCH --ntasks=1
 #  run on one node, important if you have more than 1 ntasks
 #SBATCH --nodes=1
 #  maximum walltime
-#SBATCH --time=12:00:00
+#SBATCH --time=4:00:00
 #  maximum requested memory
 #SBATCH --mem=20G
 #  write std out and std error to these files
@@ -22,12 +22,10 @@
 #  there are global,testing,highmem,standard,fast
 #SBATCH --partition=standard
 
-for each in ST11IR_7*bam
-do
-gatk --java-options "-Xmx4g" HaplotypeCaller --pcr-indel-model NONE \
-   -R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
-   -I ${each} \
-   -O ./haps/${each%_RG.bam}.g.vcf.gz \
-   -ploidy 1 \
-   -ERC GVCF
-done
+gatk SelectVariants \
+     -R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
+     -V ZA_genotype_SNPs4.vcf.gz \
+     --select-type-to-include SNP \
+     --exclude-non-variants \
+     --remove-unused-alternates \
+     -O SNPs4_genotype_select.vcf.gz
