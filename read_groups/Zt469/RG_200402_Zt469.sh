@@ -5,10 +5,10 @@ for each in *.bam
 do
 java -jar /home/lahm/software/picard/build/libs/picard.jar AddOrReplaceReadGroups \
       I=${each} \
-      O=./RG/${each%sorted.bam}RG.bam \
-      RGID=C \
+      O=./RG/${each%sorted_Zt469.bam}RG.bam \
+      RGID=A \
       RGLB=lib1 \
       RGPL=illumina \
-      RGPU=run3 \
-      RGSM=${each%_C_sorted.bam}
+      RGPU=run1 \
+      RGSM=${each%_A_sorted_Zt469.bam}
 done
