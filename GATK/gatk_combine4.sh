@@ -1,26 +1,8 @@
 #!/bin/bash
 #
-#  submit by  sbatch serial-job.sh
-#
-#  specify the job name
-#SBATCH --job-name=combine
-#  how many cpus are requested
-#SBATCH --ntasks=1
-#  run on one node, important if you have more than 1 ntasks
-#SBATCH --nodes=1
-#  maximum walltime
-#SBATCH --time=2:00:00
-#  maximum requested memory
-#SBATCH --mem=20G
-#  write std out and std error to these files
-#SBATCH --error=essai_aln_280.sterr
-#SBATCH --output=essai_aln_280.stout
-#  send a mail for job start, end, fail, etc.
-#SBATCH --mail-type=NONE
-#SBATCH --mail-user=lahm@evolbio.mpg.de
-#  which partition?
-#  there are global,testing,highmem,standard,fast
-#SBATCH --partition=standard
+
+## (on the cluster)
+# Combining all haplotype files into a single g.vcf prior to genotyping
 
 gatk CombineGVCFs \
    -R /home/lahm/ZA/ZA100/Za100_canu.unitigs.fasta \
@@ -58,5 +40,6 @@ gatk CombineGVCFs \
    --variant ST11IR_11_1_1_RG.g.vcf.gz \
    --variant ST11IR_11_4_1_GGCTAC_L001_RG.g.vcf.gz \
    --variant STIR041.1.1.g.vcf.gz \
+   --variant STIR041.1.2.g.vcf.gz \
    --variant STIR043.3.2.g.vcf.gz \
-   -O ./35/35_combined_SNPs.g.vcf.gz
+   -O ZA_combined_SNPs4.g.vcf.gz
