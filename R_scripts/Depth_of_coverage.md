@@ -1,0 +1,140 @@
+Depth of Coverage
+================
+brendanlahm
+1/12/2021
+
+``` r
+## Depth for each individual run (mapped to Za100)
+
+# Loading the csv file
+
+means = read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/depth_means.csv", header = T, sep = ",", na.strings = "")
+
+# reformatting
+
+names(means) = c("Sample", "Mean_Depth", "Sampling_Run")
+means$Sample <- as.factor(as.character(means$Sample))
+means$Sampling_Run <- as.factor(as.character(means$Sampling_Run))
+
+# plot
+
+library(ggplot2)
+ggplot(means, aes(x = Sample, y = Mean_Depth, fill = Sampling_Run)) +
+      geom_bar(position = "dodge", stat = "identity", alpha = 0.8) +
+      theme_classic(base_size = 14) + ylab("Mean Depth") + xlab("Sample") +
+      theme(legend.text = element_text(size=16), axis.title = element_text(size=16)) +
+      scale_fill_discrete(name = "Sequencing Run")
+```
+
+![](Depth_of_coverage_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+``` r
+## Expected vs coverage after mapping
+
+# Loading the csv file
+
+depth = read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/depth_target_v_actual.csv", header = T, sep = ",", na.strings = "")
+
+# reformatting
+
+names(depth) = c("Sample", "Expected", "After Mapping")
+depth$Sample <- as.factor(as.character(depth$Sample))
+
+library(reshape2)
+depth2 <- melt(depth)
+names(depth2)[3] = c("Coverage")
+
+# plot
+
+ggplot(depth2, aes(x = Sample, y = Coverage, fill = variable)) +
+  geom_bar(position = "dodge", stat = "identity", alpha = 1.2, width = 0.8) +
+  theme_classic(base_size = 14) + ylab("Additive Depth") + xlab("Sample") +
+  theme(legend.title=element_blank(), legend.text = element_text(size=16), axis.title = element_text(size=16))
+```
+
+![](Depth_of_coverage_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
+
+``` r
+###################################### Mapping %
+     
+# Loading the csv file
+     
+map_per = read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/map_per.csv", header = T, sep = ",", na.strings = "")
+map_ZA_ZT = read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/map_ZA_ZT.csv", header = T, sep = ",", na.strings = "")
+map_ZT469 = read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/map_ZT469.csv", header = T, sep = ",", na.strings = "")
+
+## All 37 samples mapped to Zt469 (in separate files)
+
+ZT469_old =  read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/map_ZT469_old.csv", header = T, sep = ",", na.strings = "")
+ZT469_new =  read.csv("C:/Users/bml99/OneDrive/Documents/R/2020/map_ZT469_new.csv", header = T, sep = ",", na.strings = "")
+
+# reformatting
+     
+names(map_per) = c("Sample", "Mapping_Percent", "Sampling_Run")
+map_per$Sample <- as.factor(as.character(map_per$Sample))
+map_per$Sampling_Run <- as.factor(as.character(map_per$Sampling_Run))
+     
+names(map_ZA_ZT) = c("Sample", "Mapping_Percent", "Reference")
+map_ZA_ZT$Sample <- as.factor(as.character(map_ZA_ZT$Sample))
+map_ZA_ZT$Reference <- as.factor(as.character(map_ZA_ZT$Reference))
+
+names(map_ZT469) = c("Sample", "Mapping_Percent")
+map_ZT469$Sample <- as.factor(as.character(map_ZT469$Sample))
+
+## 37 samples mapped to Zt469
+
+names(ZT469_old) = c("Sample", "Mapping_Percent")
+ZT469_old$Sample <- as.factor(as.character(ZT469_old$Sample))
+
+
+names(ZT469_new) = c("Sample", "Mapping_Percent")
+ZT469_new$Sample <- as.factor(as.character(ZT469_new$Sample))
+
+# plot % reads mapped to Zt469 per run
+     
+ggplot(map_per, aes(x = Sample, y = Mapping_Percent, fill = Sampling_Run)) +
+       geom_bar(position = "dodge", stat = "identity", alpha = 1.2, width = 0.8) +
+       theme_classic(base_size = 14) + ylab("% Reads Mapped") + xlab("Sample") + 
+       theme(legend.text = element_text(size=16), axis.title = element_text(size=16)) + 
+       scale_fill_discrete(name = "Sequencing Run") + coord_cartesian(ylim = c(0, 100))
+```
+
+![](Depth_of_coverage_files/figure-gfm/unnamed-chunk-1-3.png)<!-- -->
+
+``` r
+# plot (Za17 vs Zt469)
+
+ggplot(map_ZA_ZT, aes(x = Sample, y = Mapping_Percent, fill = Reference)) +
+  geom_bar(position = "dodge", stat = "identity", alpha = 1.2, width = 0.8) +
+  theme_classic(base_size = 14) + ylab("% Reads Mapped") + xlab("Sample") + 
+  theme(legend.text = element_text(size=16), axis.title = element_text(size=16)) + 
+  scale_fill_discrete(name = "Reference") + coord_cartesian(ylim = c(0, 100))
+```
+
+![](Depth_of_coverage_files/figure-gfm/unnamed-chunk-1-4.png)<!-- -->
+
+``` r
+## Plotting 37 samples (mapped to Zt469)
+
+library(forcats)
+
+ggplot(ZT469_old, aes(x = fct_inorder(Sample), y = Mapping_Percent)) +
+  geom_bar(position = "dodge", stat = "identity", alpha = 1.2, width = 0.8) +
+  theme_classic(base_size = 14) + ylab("% Reads Mapped") +
+  theme(legend.text = element_text(size=26), axis.title = element_text(size=22)) +
+  theme(axis.title.x=element_blank()) +
+  coord_cartesian(ylim = c(0, 100))
+```
+
+![](Depth_of_coverage_files/figure-gfm/unnamed-chunk-1-5.png)<!-- -->
+
+``` r
+ggplot(ZT469_new, aes(x = Sample, y = Mapping_Percent)) +
+  geom_bar(position = "dodge", stat = "identity", alpha = 1.2, width = 0.8) +
+  theme_classic(base_size = 14) +
+  theme(legend.text = element_text(size=10), axis.title = element_text(size=22)) +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  coord_cartesian(ylim = c(0, 100))
+```
+
+![](Depth_of_coverage_files/figure-gfm/unnamed-chunk-1-6.png)<!-- -->
