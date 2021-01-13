@@ -1,0 +1,67 @@
+---
+title: "PCA"
+author: "brendanlahm"
+date: "1/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = T, warning = F, message = F, results = F}
+
+## Installing SNPRelate (only need to do this once in RStudio)
+
+BiocManager::install(c("SNPRelate"))
+
+### NOW this command ONLY is needed!
+
+library("SNPRelate")
+
+
+########################### 36 sample PCA
+
+vcf.new <- "C:/Users/bml99/Desktop/SNPs4_final.recode.vcf"
+snpgdsVCF2GDS(vcf.new, "ccm.new")
+genofile_new <- snpgdsOpen("ccm.new")
+ccm_new <- snpgdsPCA(genofile_new, autosome.only=FALSE)
+
+##### Population data
+
+pop_data = read.table("C:/Users/bml99/OneDrive/Documents/R/2020/samp_pop2.tab", header = T, sep = "\t")
+
+poptab_new <- data.frame(sample.id = pop_data$sample.id,
+                      Location = pop_data$Location,
+                      Host = pop_data$Host,
+                      EV1 = ccm_new$eigenvect[,1],    # the first eigenvector
+                      EV2 = ccm_new$eigenvect[,2],    # the second eigenvector
+                      EV3 = ccm_new$eigenvect[,3],    # the third eigenvector
+                      stringsAsFactors = FALSE)
+
+poptab_new$Location_f = factor(poptab_new$Location, levels=c('A (2018)','EA (2018)','L1a (2004)','L1b (2011)','L3 (2004)',
+                                                             'L6 (2011)','L7 (2011)','L8 (2011)','L11 (2011)'))
+
+#### Plotting
+
+library(ggplot2)
+s <- ggplot(poptab_new, aes(x=EV1,y=EV2,color=Location_f, shape=Host )) + theme_bw() + # EV1 vs EV2
+  theme(legend.text = element_text(size=12), axis.text.x = element_text(size=10), axis.text.y = element_text(size=10)) +
+  scale_color_manual(values=c("#E69F00", "#56B4E9", "#66FFCC", "#66FF33", "#66CC00", "#009900", "#FF6666", "#CC00FF", "#CC0033"))
+s <- s+geom_point(size=3)
+s
+
+t <- ggplot(poptab_new, aes(x=EV1,y=EV3,color=Location_f, shape=Host )) + theme_bw() + # EV1 vs EV3
+  theme(legend.text = element_text(size=12)) +
+  scale_color_manual(values=c("#E69F00", "#56B4E9", "#66FFCC", "#66FF33", "#66CC00", "#009900", "#FF6666", "#CC00FF", "#CC0033"))
+t <- t+geom_point(size=3)
+t
+
+u <- ggplot(poptab_new, aes(x=EV2,y=EV3,color=Location_f, shape=Host )) + theme_bw() + # EV2 vs EV3
+  theme(legend.text = element_text(size=12)) +
+  scale_color_manual(values=c("#E69F00", "#56B4E9", "#66FFCC", "#66FF33", "#66CC00", "#009900", "#FF6666", "#CC00FF", "#CC0033"))
+u <- u+geom_point(size=3)
+u
+
+```
+
