@@ -1,8 +1,9 @@
-########################### Admixture shiny app
+############################################## Shiny app for plotting admixture
+##### The repository must be located inside of your working directory
+
 library(shiny)
 library(reshape2)
 library(ggplot2)
-
 
 ### Importing info for sampling year, location & host
 
