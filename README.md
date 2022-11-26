@@ -13,4 +13,3 @@
 ### circos: Shell scripts for creating circos plots
 ### data: data files required for running the Admixture App
 
-## To run the Admixture App: Set working directory in R to the location of the cloned repository

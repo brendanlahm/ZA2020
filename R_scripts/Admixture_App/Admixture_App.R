@@ -1,5 +1,6 @@
 ############################################## Shiny app for plotting admixture
 ##### The repository must be located inside of your working directory
+#### list.files() -> shows "ZA2020"
 
 library(shiny)
 library(reshape2)
