@@ -5,6 +5,7 @@
 ### Filtering: Shell scripts for filtering SNPs on quality & singletons
 ### GATK: Shell scripts for VCF file manipulation w/ GATK
 ### Mapping: Shell scripts for read mapping w/ bwa
+### Python_scripts: Python scripts for data exploration
 ### R_scripts: R scripts used for data plotting (including a Shiny app for interactive Admixture plotting)
 ### Read_groups: Shell scripts for assigning read groups & merging bam files
 ### Sorting+Coverage: Shell scripts for calculating depth of coverage w/ SAMtools
