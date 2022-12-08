@@ -1,6 +1,4 @@
-############################################## Shiny app for plotting admixture
-##### The repository must be located inside of your working directory
-#### list.files() -> shows "ZA2020"
+#### Shiny app for plotting admixture
 
 library(shiny)
 library(reshape2)
@@ -8,10 +6,10 @@ library(ggplot2)
 
 ### Importing info for sampling year, location & host
 
-isolates2 <- read.table("~/ZA2020/data/36_isolates2.tab", header = T, row.names = NULL)
-locations <- read.table("~/ZA2020/data/36_locations.tab", header = T)
-hosts2 <- read.table("~/ZA2020/data/36_hosts2.tab", header = T, row.names = NULL)
-years <- read.table("~/ZA2020/data/36_years.tab", header = T, row.names = NULL)
+isolates2 <- read.table("../../data/36_isolates2.tab", header = T, row.names = NULL)
+locations <- read.table("../../data/36_locations.tab", header = T)
+hosts2 <- read.table("../../data/36_hosts2.tab", header = T, row.names = NULL)
+years <- read.table("../../data/36_years.tab", header = T, row.names = NULL)
 
 years$Year <- as.character(as.numeric(years$Year))
 
@@ -64,7 +62,7 @@ server <- function(input, output, session=session) {
     
   output$plot <- renderPlot({
     
-    file <- read.table(paste0("~/ZA2020/R_scripts/Admixture_files/SNPs4_leafy.", pops(), ".Q"))
+    file <- read.table(paste0("../Admixture_files/SNPs4_leafy.", pops(), ".Q"))
       
     K6T <- data.frame(isolates2, locations, years, hosts2, file)
     K6T2 <- melt(K6T)

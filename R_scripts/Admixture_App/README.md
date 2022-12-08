@@ -2,16 +2,12 @@
 
 1) Open Admixture_App.Rproj & Admixture_App.R
 
-2) Run the following code:
+2) Check that the folder containing the App is your current working directory in R
+
+3) Run the following command in your R console:
 ```r
-# Make sure the working directory in R was changed to inside of the repository
-getwd()
-
-# Otherwise, make sure this command returns the repository "ZA2020"
-list.files()
-
-# Restore the project environment from renv.lock
 renv::restore()
 ```
+This command restores the App's environment. However, you may still be prompted to install any packages that were missed (e.g. reshape2)
 
-3) Click Run App
+4) Click Run App
