@@ -11,3 +11,5 @@ renv::restore()
 This command restores the App's environment. However, you may still be prompted to install any packages that were missed (e.g. reshape2)
 
 4) Click Run App
+
+## app.R was used for creating the Docker image

@@ -1,8 +1,12 @@
 #### Shiny app for plotting admixture
 
-require(shiny)
-require(reshape2)
-require(ggplot2)
+library(shiny)
+library(reshape2)
+library(ggplot2)
+
+# Specify the application port
+options(shiny.host = "0.0.0.0")
+options(shiny.port = 3838)
 
 ### Importing info for sampling year, location & host
 
