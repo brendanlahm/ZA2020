@@ -2,6 +2,8 @@
 
 Code used in the writing of Brendan Lahm's Master's thesis: Comparative and population genomics of the wild grass pathogen *Zymoseptoria ardabiliae*
 
+![alt text](https://github.com/brendanlahm/ZA2020/blob/master/circos/Za100_Zt469/Fig_10.png)
+
 ## Folders
 
 - **ADMIXTURE:** Shell scripts for determining population structure w/ ADMIXTURE 1.3.0
