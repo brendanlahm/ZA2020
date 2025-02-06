@@ -23,7 +23,7 @@ ui <- fluidPage(
   fluidRow(
     
     column(3, 
-           h3("# Subpopulations"),
+           h3(div("#", em("Zymoseptoria ardabiliae"), "subpopulations")),
            numericInput("k_value", 
                         value = 2,
                         min = 2,

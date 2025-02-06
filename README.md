@@ -14,5 +14,3 @@ The purpose of this project was to determine whether unitig 9 was transferred fr
 
 - **Shell_scripts:** Shell scripts for processing raw data
 
-- **data:** data files required for running the Admixture App
-
