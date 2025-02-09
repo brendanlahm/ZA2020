@@ -4,8 +4,6 @@
 
 - **Admixture_App:** R Project and environment dependencies for the Admixture App
 
-- **Admixture_files:** Data files required to run the Admixture App
-
 - **Depth_of_coverage_files:** Depth of coverage plots
 
 - **Nucleotide_diversity_files:** Nucleotide diversity plots

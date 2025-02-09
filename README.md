@@ -8,6 +8,8 @@ The purpose of this project was to determine whether unitig 9 was transferred fr
 
 ## Folders
 
+- **Nextflow:** A Nextflow script for extracting data from a FASTA file
+
 - **Python_scripts:** Python scripts for data exploration
 
 - **R_scripts:** R scripts used for data plotting (including a Shiny app for interactive Admixture plotting)
