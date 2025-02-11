@@ -13,3 +13,5 @@ This command restores the App's environment. However, you may still be prompted 
 4) Click Run App
 
 ## app.R was used for creating the Docker image
+
+![alt text](https://github.com/brendanlahm/ZA2020/blob/master/R_scripts/Admixture_App/Admixture_files/figure-gfm/unnamed-chunk-1-4.png)
